@@ -63,7 +63,7 @@ cache:
 
 before_script:
   - autoreconf -vis
-  - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby --enable-go GCCGOFLAGS="-static-libgcc" SWIGGOPARAMS=" ";
+  - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby --enable-go GCCGOFLAGS="-static-libgcc $CFLAGS" SWIGGOPARAMS=" ";
 
 addons:
   coverity_scan:
