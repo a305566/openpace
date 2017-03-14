@@ -14,7 +14,9 @@ env:
 matrix:
   include:
     - compiler: clang
+      env: CFLAGS=-coverage LDFLAGS=-coverage
     - compiler: gcc
+      CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
     - env: TARGET=emscripten
@@ -46,11 +48,6 @@ install:
         git clone --recursive https://github.com/marco-c/emscripten-sdk.git;
         cd emscripten-sdk && ./emsdk activate latest && cd ..;
         source emscripten-sdk/emsdk_env.sh;
-      fi
-    fi
-  - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
-      if [ -z "$TARGET" ]; then
-        export CFLAGS="-ftest-coverage";
       fi
     fi
   - make --version
