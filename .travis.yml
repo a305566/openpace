@@ -86,6 +86,7 @@ script:
 after_success:
   - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
       if [ -z "$TARGET" ]; then
+        gcov -p -r `find . -name '*.gcda'`;
         bash <(curl -s https://codecov.io/bash);
       fi
     fi
