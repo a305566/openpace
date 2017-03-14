@@ -48,6 +48,11 @@ install:
         source emscripten-sdk/emsdk_env.sh;
       fi
     fi
+  - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
+      if [ -z "$TARGET" ]; then
+        export CFLAGS="-coverage";
+      fi
+    fi
   - make --version
   - uname -a
 
@@ -78,6 +83,13 @@ script:
         make check;
       elif [ "${TARGET}" == emscripten ]; then
         cd openpace-*_js/bin && js eactest.js && cd -;
+      fi
+    fi
+
+after_success:
+  - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
+      if [ -z "$TARGET" ]; then
+        bash <(curl -s https://codecov.io/bash);
       fi
     fi
 
