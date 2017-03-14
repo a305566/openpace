@@ -50,7 +50,7 @@ install:
     fi
   - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
       if [ -z "$TARGET" ]; then
-        export CFLAGS="-coverage";
+        export CFLAGS="-ftest-coverage";
       fi
     fi
   - make --version
