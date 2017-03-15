@@ -35,7 +35,7 @@ before_install:
 install:
   - date
   - if [ $TRAVIS_OS_NAME == linux ]; then
-      sudo apt-get -qq install xutils-dev gengetopt help2man swig python-dev openjdk-7-jdk openjdk-7-jre-headless golang-go gccgo ruby-dev gcov-4.8;
+      sudo apt-get -qq install xutils-dev gengetopt help2man swig python-dev openjdk-7-jdk openjdk-7-jre-headless golang-go gccgo ruby-dev gcov-4.6;
       if   [ "${WIN_TOOL}" == i686-w64-mingw32 ]; then
         sudo apt-get -qq install mingw-w64 mingw-w64-tools binutils-mingw-w64-i686 gcc-mingw-w64-i686;
       elif [ "${WIN_TOOL}" == x86_64-w64-mingw32 ]; then
@@ -86,7 +86,7 @@ script:
 after_success:
   - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
       if [ -z "$TARGET" ]; then
-        find . -type f -name '*.gcda' -exec gcov-4.8 {} +;
+        find . -type f -name '*.gcda' -exec gcov-4.6 {} +;
         bash <(curl -s https://codecov.io/bash);
       fi
     fi
