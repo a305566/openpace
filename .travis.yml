@@ -16,7 +16,7 @@ matrix:
     - compiler: clang
       env: CFLAGS=-coverage LDFLAGS=-coverage
     - compiler: gcc
-      CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs
+      env: CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
     - env: TARGET=emscripten
