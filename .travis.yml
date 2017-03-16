@@ -59,7 +59,7 @@ addons:
       - gcc-mingw-w64-i686
       - gcc-mingw-w64-x86-64
       - gccgo
-      - gcov-4.9
+      - gcov
       - gengetopt
       - golang-go
       - help2man
