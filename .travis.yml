@@ -26,30 +26,6 @@ matrix:
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - binutils-mingw-w64-i686
-      - binutils-mingw-w64-x86-64
-      - g++4.9
-      - gcc-mingw-w64-i686
-      - gcc-mingw-w64-x86-64
-      - gccgo
-      - gcov-4.9;
-      - gengetopt
-      - golang-go
-      - help2man
-      - mingw-w64
-      - mingw-w64-tools
-      - openjdk-7-jdk
-      - openjdk-7-jre-headless
-      - python-dev
-      - ruby-dev
-      - swig
-      - xutils-dev
-
 install:
   - date
   - if [ "${TARGET}" == emscripten ]; then
@@ -75,6 +51,28 @@ before_script:
   - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby --enable-go GCCGOFLAGS="-static-libgcc $CFLAGS" SWIGGOPARAMS=" ";
 
 addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - binutils-mingw-w64-i686
+      - binutils-mingw-w64-x86-64
+      - g++4.9
+      - gcc-mingw-w64-i686
+      - gcc-mingw-w64-x86-64
+      - gccgo
+      - gcov-4.9;
+      - gengetopt
+      - golang-go
+      - help2man
+      - mingw-w64
+      - mingw-w64-tools
+      - openjdk-7-jdk
+      - openjdk-7-jre-headless
+      - python-dev
+      - ruby-dev
+      - swig
+      - xutils-dev
   coverity_scan:
     project:
       name: "frankmorgner/openpace"
