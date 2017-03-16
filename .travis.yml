@@ -15,7 +15,7 @@ matrix:
   include:
     - compiler: clang
       env: CFLAGS=-coverage LDFLAGS=-coverage
-    - compiler: gcc
+    - compiler: gcc-4.9
       env: CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
@@ -56,6 +56,7 @@ addons:
       - binutils-mingw-w64-i686
       - binutils-mingw-w64-x86-64
       - g++-4.9
+      - gcc-4.9
       - gcc-mingw-w64-i686
       - gcc-mingw-w64-x86-64
       - gccgo
