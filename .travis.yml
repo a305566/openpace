@@ -41,7 +41,6 @@ install:
   - uname -a
 
 cache:
-  - apt
   directories:
     - emscripten-sdk
     - src/openssl
