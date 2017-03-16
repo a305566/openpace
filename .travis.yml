@@ -94,7 +94,7 @@ script:
 after_success:
   - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
       if [ -z "$TARGET" ]; then
-        find . -type f -name '*.gcda' -exec gcov-4.9 {} +;
+        find bindings/ src/ -type f | grep -i -e gcno$ -e gcda$ | xargs -i mv {} .;
         bash <(curl -s https://codecov.io/bash);
       fi
     fi
