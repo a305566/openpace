@@ -59,7 +59,7 @@ addons:
       - gcc-mingw-w64-i686
       - gcc-mingw-w64-x86-64
       - gccgo
-      - gcov-4.8
+      - gcov-4.9
       - gengetopt
       - golang-go
       - help2man
@@ -94,7 +94,7 @@ script:
 after_success:
   - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
       if [ -z "$TARGET" ]; then
-        find . -type f -name '*.gcda' -exec gcov-4.8 {} +;
+        find . -type f -name '*.gcda' -exec gcov-4.9 {} +;
         bash <(curl -s https://codecov.io/bash);
       fi
     fi
