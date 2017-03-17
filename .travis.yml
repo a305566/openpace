@@ -14,9 +14,9 @@ env:
 matrix:
   include:
     - compiler: clang
-      env: CFLAGS=-coverage LDFLAGS=-coverage GCOV=lcov
-    - compiler: gcc-4.9
-      env: CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs GCOV=gcov
+    - compiler: gcc
+    - compiler: gcc
+      env: GCOV=1
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
     - env: TARGET=emscripten
@@ -46,6 +46,9 @@ cache:
 
 before_script:
   - autoreconf -vis
+  - if [ -n "${GCOV}" ]; then
+      export CFLAGS="-coverage";
+    fi
   - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby --enable-go GCCGOFLAGS="-static-libgcc $CFLAGS" SWIGGOPARAMS=" ";
 
 addons:
@@ -93,7 +96,6 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      find . -type f -name '*.gcda' -exec $GCOV {} +;
       bash <(curl -s https://codecov.io/bash);
     fi
 
