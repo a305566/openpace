@@ -15,7 +15,7 @@ matrix:
   include:
     - compiler: clang
     - compiler: gcc
-    - compiler: gcc-4.9
+    - compiler: gcc
       env: GCOV=1
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
@@ -96,7 +96,7 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      find . -type f -name '*.gcda' -exec gcov --object-directory `dirname {}` {} +;
+      find . -type f -name '*.gcda' -exec gcov -o {} +;
       bash <(curl -s https://codecov.io/bash);
     fi
 
