@@ -97,8 +97,9 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      for f in src/*.c; do gcov -o `dirname $f` $f; done;
-      bash <(curl -s https://codecov.io/bash) -X gcov;
+      find . -type d -name .libs xargs -i mv {}/*.gcno {}/.. ;
+      find . -type d -name .libs xargs -i mv {}/*.gcda {}/.. ;
+      bash <(curl -s https://codecov.io/bash);
     fi
 
 notifications:
