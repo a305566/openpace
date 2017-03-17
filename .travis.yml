@@ -97,8 +97,10 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
+      ls src/.libs;
       mv src/.libs/*.gcno src ;
       mv src/.libs/*.gcda src ;
+      ls src;
       for f in src/*.c; do gcov $f; done;
       bash <(curl -s https://codecov.io/bash) -X gcov;
     fi
