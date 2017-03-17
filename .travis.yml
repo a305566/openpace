@@ -97,10 +97,10 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      find . -type d -name .libs | xargs -i mv {}/*.gcno {}/.. ;
-      find . -type d -name .libs | xargs -i mv {}/*.gcda {}/.. ;
-      for f in $(find . -name .libs); do mv $f/*.gcno $f/..; mv $f/*.gcda $f/..; done;
-      bash <(curl -s https://codecov.io/bash);
+      mv src/.libs/*.gcno src ;
+      mv src/.libs/*.gcda src ;
+      gcov src/*.c;
+      bash <(curl -s https://codecov.io/bash) -X gcov;
     fi
 
 notifications:
