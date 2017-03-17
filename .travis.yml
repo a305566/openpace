@@ -39,8 +39,6 @@ install:
   - make --version
   - gcc --version
   - gcov --version
-  - gcc-4.9 --version
-  - gcov-4.9 --version
   - uname -a
 
 cache:
@@ -63,7 +61,6 @@ addons:
       - binutils-mingw-w64-i686
       - binutils-mingw-w64-x86-64
       - g++-4.9
-      - gcc-4.9
       - gcc-mingw-w64-i686
       - gcc-mingw-w64-x86-64
       - gccgo
@@ -100,7 +97,6 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      find . -type f -name '*.gcda' -exec gcov -o {} +;
       bash <(curl -s https://codecov.io/bash) -a -o;
     fi
 
