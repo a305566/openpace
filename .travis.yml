@@ -47,7 +47,7 @@ cache:
 before_script:
   - autoreconf -vis
   - if [ -n "${GCOV}" ]; then
-      export CFLAGS="-coverage";
+      export CFLAGS="-coverage" LDFLAGS="-coverage";
     fi
   - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby --enable-go GCCGOFLAGS="-static-libgcc $CFLAGS" SWIGGOPARAMS=" ";
 
