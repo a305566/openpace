@@ -14,9 +14,9 @@ env:
 matrix:
   include:
     - compiler: clang
-      env: CFLAGS=-coverage LDFLAGS=-coverage
+      env: CFLAGS=-coverage LDFLAGS=-coverage GCOV=lcov
     - compiler: gcc-4.9
-      env: CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs
+      env: CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS=-fprofile-arcs GCOV=gcov
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
     - env: TARGET=emscripten
@@ -55,6 +55,8 @@ addons:
     packages:
       - binutils-mingw-w64-i686
       - binutils-mingw-w64-x86-64
+      - g++-4.9
+      - gcc-4.9
       - gcc-mingw-w64-i686
       - gcc-mingw-w64-x86-64
       - gccgo
@@ -90,11 +92,9 @@ script:
     fi
 
 after_success:
-  - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then
-      if [ -z "$TARGET" ]; then
-        find bindings/ src/ -type f | grep -i -e gcno$ -e gcda$ | xargs -i mv {} .;
-        bash <(curl -s https://codecov.io/bash);
-      fi
+  - if [ -n "$GCOV" ]; then
+      find . -type f -name '*.gcda' -exec $GCOV {} +;
+      bash <(curl -s https://codecov.io/bash);
     fi
 
 notifications:
