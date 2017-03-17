@@ -15,7 +15,7 @@ matrix:
   include:
     - compiler: clang
     - compiler: gcc
-    - compiler: gcc
+    - compiler: gcc-4.9
       env: GCOV=1
     - env: TARGET=win WIN_TOOL=i686-w64-mingw32
     - env: TARGET=win WIN_TOOL=x86_64-w64-mingw32
