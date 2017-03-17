@@ -101,7 +101,7 @@ script:
 after_success:
   - if [ -n "$GCOV" ]; then
       find . -type f -name '*.gcda' -exec gcov -o {} +;
-      bash <(curl -s https://codecov.io/bash);
+      bash <(curl -s https://codecov.io/bash) -a -o;
     fi
 
 notifications:
