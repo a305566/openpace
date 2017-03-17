@@ -101,8 +101,7 @@ after_success:
       mv src/.libs/*.gcno src ;
       mv src/.libs/*.gcda src ;
       ls src;
-      for f in src/*.o; do gcov $f; done;
-      bash <(curl -s https://codecov.io/bash) -X gcov;
+      bash <(curl -s https://codecov.io/bash) -a -o;
     fi
 
 notifications:
