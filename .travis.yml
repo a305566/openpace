@@ -37,6 +37,10 @@ install:
       source emscripten-sdk/emsdk_env.sh;
     fi
   - make --version
+  - gcc --version
+  - gcov --version
+  - gcc-4.9 --version
+  - gcov-4.9 --version
   - uname -a
 
 cache:
