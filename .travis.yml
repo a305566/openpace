@@ -96,6 +96,7 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
+      find . -type f | grep -i -e gcno$ -e gcda$ | xargs -i mv {} .;
       bash <(curl -s https://codecov.io/bash);
     fi
 
