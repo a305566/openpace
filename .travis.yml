@@ -97,8 +97,8 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      for f in $(find . | grep -E '\.c$'); do gcov $f; done;
-      bash <(curl -s https://codecov.io/bash) -a -o;
+      for f in $(find . | grep -E '\.c$'); do gcov -o $f; done;
+      bash <(curl -s https://codecov.io/bash) -X gcov;
     fi
 
 notifications:
