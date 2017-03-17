@@ -96,7 +96,7 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      find . -type f | grep -i -e gcno$ -e gcda$ | xargs -i mv {} .;
+      find . -type f -name '*.gcda' -exec gcov --object-directory `dirname {}` {} +;
       bash <(curl -s https://codecov.io/bash);
     fi
 
