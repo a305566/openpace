@@ -98,7 +98,7 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      lcov --base-directory . --directory . --capture --output-file gcov.info;
+      lcov --compat-libtool --base-directory . --directory . --capture --output-file gcov.info;
       bash <(curl -s https://codecov.io/bash) -X gcov;
     fi
 
