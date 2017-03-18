@@ -49,7 +49,7 @@ cache:
 before_script:
   - autoreconf -vis
   - if [ -n "${GCOV}" ]; then
-      export CFLAGS="-fprofile-arcs -ftest-coverage" LDFLAGS="-fprofile-arcs -ftest-coverage";
+    export CFLAGS="-O0 -coverage" LDFLAGS="-coverage";
     fi
   - ./configure --enable-openssl-install --enable-python --enable-java --enable-ruby --enable-go GCCGOFLAGS="-static-libgcc $CFLAGS" SWIGGOPARAMS=" ";
 
