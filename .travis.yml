@@ -67,6 +67,7 @@ addons:
       - gengetopt
       - golang-go
       - help2man
+      - lcov
       - mingw-w64
       - mingw-w64-tools
       - openjdk-7-jdk
@@ -97,12 +98,7 @@ script:
 
 after_success:
   - if [ -n "$GCOV" ]; then
-      ls src/.libs;
-      echo ls src/.libs;
-      mv src/.libs/* src ;
-      ls src;
-      echo ls src;
-      gcov -o src src/*.c;
+      lcov --base-directory src --directory src/.libs/ --capture --output-file gcov.info;
       bash <(curl -s https://codecov.io/bash) -X gcov;
     fi
 
